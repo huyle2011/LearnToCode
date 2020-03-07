@@ -1,5 +1,6 @@
 import { tiny, defs } from "./project-resources.js";
 import Player from "./Objects/Player.js";
+import Enemy from "./Objects/Enemy.js";
 import Camera from "./Objects/Camera.js";
 import SkyBox from "./Objects/SkyBox.js";
 import Terrain from "./Objects/Terrain.js";
@@ -41,8 +42,9 @@ const Main_Scene = class Car_Moving extends Scene {
     this.sky_box = new SkyBox();
     this.terrain = new Terrain(Vec.of(0.5, 0, 0.5), 800);
     this.player = new Player();
+    this.enemy = new Enemy();
     this.camera = new Camera(this.player);
-    this.water = new Water(Vec.of(-220, -45, -180));
+    this.water = new Water(Vec.of(-20, -45, 0));
 
     this.lights = [ new Light( Vec.of( 0, 0, 0, 1 ), Color.of( 0.5, 0.4, 0.3,1 ), 100000 ),
                     new Light( Vec.of(-200, 0, -200, 1), Color.of(0.5, 0.4, 0.3, 1), 100000 ),
@@ -83,6 +85,7 @@ const Main_Scene = class Car_Moving extends Scene {
     program_state.current_terrain = this.terrain;
     program_state.camera = this.camera;
     program_state.player = this.player;
+    program_state.enemy = this.enemy;
     program_state.water = this.water;
 
     /********************
@@ -115,13 +118,17 @@ const Main_Scene = class Car_Moving extends Scene {
     this.sky_box.update(program_state);
     this.terrain.update(program_state);
     this.player.update(program_state);
+    this.enemy.update(program_state);
     this.camera.update(program_state);
+    this.water.update(program_state);
   }
 
   render(context, program_state) {
     this.terrain.draw(context, program_state);
     this.sky_box.draw(context, program_state);
     this.player.draw(context, program_state);
+    this.enemy.draw(context, program_state);
+    this.water.draw(context, program_state);
   }
 };
 
