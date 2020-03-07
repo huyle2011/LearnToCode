@@ -1,6 +1,7 @@
 import { tiny, defs } from "../project-resources.js";
 
 const { Vec, Mat4, Material, Texture } = tiny;
+//const { vec3, vec4, vec, color, Mat4, Light, Shape, Material, Shader, Texture, Scene } = tiny;
 const { Cube } = defs;
 
 class Enemy {
@@ -168,6 +169,66 @@ class Enemy {
     }
 
     draw(context, program_state) {
+        let movement = Math.floor((Math.random() * 7))
+        /*
+        this.key_triggered_button(
+            "Forward",
+            ["w"],
+            () => (this.player.current_speed = this.player.RUN_SPEED),
+            undefined,
+            () => (this.player.current_speed = 0)
+        );
+
+        this.key_triggered_button(
+            "Back",
+            ["s"],
+            () => (this.player.current_speed = -this.player.RUN_SPEED),
+            undefined,
+            () => (this.player.current_speed = 0)
+        );
+
+        this.key_triggered_button(
+            "Turn Left",
+            ["a"],
+            () => (this.player.current_turn_speed = this.player.TURN_SPEED),
+            undefined,
+            () => (this.player.current_turn_speed = 0)
+        );
+
+        this.key_triggered_button(
+            "Turn Right",
+            ["d"],
+            () => (this.player.current_turn_speed = -this.player.TURN_SPEED),
+            undefined,
+            () => (this.player.current_turn_speed = 0)
+        );
+
+        this.key_triggered_button(
+            "Jump",
+            [" "],
+            () => this.player.jump(),
+            undefined,
+            undefined
+        );
+         */
+        switch(movement) {
+            case 0:
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
+        }
         this.limb_angle = this.current_speed
             ? (Math.PI / 3) * Math.sin(program_state.animation_time / 150)
             : 0;

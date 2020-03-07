@@ -6,6 +6,7 @@ import SkyBox from "./Objects/SkyBox.js";
 import Terrain from "./Objects/Terrain.js";
 import Water from "./Objects/Water.js";
 import MovementControls from "./Controls/MovementControls.js";
+//import EnemyMovementControls from "./Controls/EnemyMovement";
 import CameraControls from "./Controls/CameraControls.js";
 
 
@@ -62,7 +63,9 @@ const Main_Scene = class Car_Moving extends Scene {
     if (!context.scratchpad.controls) {
       // Add a movement controls panel to the page:
       this.children.push(
-        (context.scratchpad.controls = new MovementControls(this.player))
+        (context.scratchpad.controls = new MovementControls(this.player)),
+          //(context.scratchpad.controls = new EnemyMovementControls(this.enemy))
+
       );
 
       program_state.projection_transform = Mat4.perspective(

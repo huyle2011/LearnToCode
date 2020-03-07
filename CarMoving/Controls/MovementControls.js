@@ -113,6 +113,14 @@ class MovementControls extends Scene {
       undefined
     );
 
+    this.key_triggered_button(
+        "Sprint",
+        ["Shift", "w"],
+        () => this.player.current_speed = 2.0 * this.player.RUN_SPEED,
+        undefined,
+        this.player.current_speed = 0
+    );
+
     this.new_line();
 
     this.key_triggered_button(
