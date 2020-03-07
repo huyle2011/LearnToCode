@@ -52,6 +52,43 @@ const Main_Scene = class Car_Moving extends Scene {
                     new Light( Vec.of(200, 0, 200, 1), Color.of(0.5, 0.4, 0.3, 1), 100000 ),
                     new Light( Vec.of(-200, 0, 200, 1), Color.of(0.5, 0.4, 0.3, 1), 100000 ),
                     new Light( Vec.of(200, 0, -200, 1), Color.of(0.5, 0.4, 0.3, 1), 100000 )];
+    let a = Math.floor((Math.random() * 20) - 10);
+    let b = Math.floor((Math.random() * 20) - 10);
+    let c = 70;
+    let d = Vec.of(a,b,c);
+    this.enemy1 = new Enemy(d);
+    a = Math.floor((Math.random() * 20) - 10);
+    b = Math.floor((Math.random() * 20) - 10);
+    d = Vec.of(a,b,c);
+    this.enemy2 = new Enemy(d);
+    a = Math.floor((Math.random() * 20) - 10);
+    b = Math.floor((Math.random() * 20) - 10);
+    d = Vec.of(a,b,c);
+    this.enemy3 = new Enemy(d);
+    a = Math.floor((Math.random() * 20) - 10);
+    b = Math.floor((Math.random() * 20) - 10);
+    d = Vec.of(a,b,c);
+    this.enemy4 = new Enemy(d);
+    a = Math.floor((Math.random() * 20) - 10);
+    b = Math.floor((Math.random() * 20) - 10);
+    d = Vec.of(a,b,c);
+    this.enemy5 = new Enemy(d);
+    a = Math.floor((Math.random() * 20) - 10);
+    b = Math.floor((Math.random() * 20) - 10);
+    d = Vec.of(a,b,c);
+    this.enemy6 = new Enemy(d);
+    a = Math.floor((Math.random() * 20) - 10);
+    b = Math.floor((Math.random() * 20) - 10);
+    d = Vec.of(a,b,c);
+    this.enemy7 = new Enemy(d);
+    a = Math.floor((Math.random() * 20) - 10);
+    b = Math.floor((Math.random() * 20) - 10);
+    d = Vec.of(a,b,c);
+    this.enemy8 = new Enemy(d);
+    a = Math.floor((Math.random() * 20) - 10);
+    b = Math.floor((Math.random() * 20) - 10);
+    d = Vec.of(a,b,c);
+    this.enemy9 = new Enemy(d);
   }
 
   make_control_panel() {
@@ -91,6 +128,17 @@ const Main_Scene = class Car_Moving extends Scene {
     program_state.enemy = this.enemy;
     program_state.water = this.water;
 
+    program_state.enemy1 = this.enemy1;
+    program_state.enemy2 = this.enemy2;
+    program_state.enemy3 = this.enemy3;
+    program_state.enemy4 = this.enemy4;
+    program_state.enemy5 = this.enemy5;
+    program_state.enemy6 = this.enemy6;
+    program_state.enemy7 = this.enemy7;
+    program_state.enemy8 = this.enemy8;
+    program_state.enemy9 = this.enemy9;
+
+
     /********************
       Starting here!!!!
      *******************/
@@ -124,6 +172,16 @@ const Main_Scene = class Car_Moving extends Scene {
     this.enemy.update(program_state);
     this.camera.update(program_state);
     this.water.update(program_state);
+
+    this.enemy1.update(program_state);
+    this.enemy2.update(program_state);
+    this.enemy3.update(program_state);
+    this.enemy4.update(program_state);
+    this.enemy5.update(program_state);
+    this.enemy6.update(program_state);
+    this.enemy7.update(program_state);
+    this.enemy8.update(program_state);
+    this.enemy9.update(program_state);
   }
 
   render(context, program_state) {
@@ -132,6 +190,16 @@ const Main_Scene = class Car_Moving extends Scene {
     this.player.draw(context, program_state);
     this.enemy.draw(context, program_state);
     this.water.draw(context, program_state);
+
+    this.enemy1.draw(context, program_state);
+    this.enemy2.draw(context, program_state);
+    this.enemy3.draw(context, program_state);
+    this.enemy4.draw(context, program_state);
+    this.enemy5.draw(context, program_state);
+    this.enemy6.draw(context, program_state);
+    this.enemy7.draw(context, program_state);
+    this.enemy8.draw(context, program_state);
+    this.enemy9.draw(context, program_state);
   }
 };
 

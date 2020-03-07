@@ -35,6 +35,7 @@ class Enemy {
             // walk_in_water: new Audio("assets/water_footstep.wav")
         };
         this.is_in_water = false;
+        this.movement = 0;
     }
 
     is_near_object(object_position, distance_square = 10000) {
@@ -169,23 +170,12 @@ class Enemy {
     }
 
     draw(context, program_state) {
-        let movement = Math.floor((Math.random() * 7))
+        let t = program_state.animation_time / 1000;
+        if(t%2) {
+            this.movement = Math.floor((Math.random() * 7));
+        }
         /*
-        this.key_triggered_button(
-            "Forward",
-            ["w"],
-            () => (this.player.current_speed = this.player.RUN_SPEED),
-            undefined,
-            () => (this.player.current_speed = 0)
-        );
 
-        this.key_triggered_button(
-            "Back",
-            ["s"],
-            () => (this.player.current_speed = -this.player.RUN_SPEED),
-            undefined,
-            () => (this.player.current_speed = 0)
-        );
 
         this.key_triggered_button(
             "Turn Left",
@@ -211,18 +201,25 @@ class Enemy {
             undefined
         );
          */
-        switch(movement) {
+        switch(this.movement) {
             case 0:
+                this.current_speed = this.RUN_SPEED;
                 break;
             case 1:
+                this.current_speed = -this.RUN_SPEED;
                 break;
             case 2:
+                this.current_turn_speed = this.TURN_SPEED;
+                this.current_speed = this.RUN_SPEED;
                 break;
             case 3:
+                this.current_turn_speed = -this.TURN_SPEED;
+                this.current_speed = this.RUN_SPEED;
                 break;
             case 4:
                 break;
             case 5:
+                this.current_speed = 2.0 * this.RUN_SPEED;
                 break;
             case 6:
                 break;
