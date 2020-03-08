@@ -5,14 +5,14 @@ const { Vec, Mat4, Material, Texture } = tiny;
 const { Cube } = defs;
 
 class Bullet {
-    constructor(position = Vec.of(0, 0, 60)) {
+    constructor(position = Vec.of(0, 0, 80), rotation = Vec.of(0,180,0)) {
         this.shape = new Cube();
         this.material = new Material(new defs.Textured_Phong(3), {
             texture: new Texture("assets/stars.png"),
             ambient: 1
         });
         this.position = position;
-        this.rotation = Vec.of(0, 180, 0);
+        this.rotation = rotation;
         this.RUN_SPEED = 60;
         this.TURN_SPEED = 160;
         this.GRAVITY = 0;
@@ -192,8 +192,11 @@ class Bullet {
                         this.position[0],
                         this.position[1],
                         this.position[2]
-                    ])
-                ), this.material);
+                    ]))
+                .times(
+                    Mat4.rotation(((2 * Math.PI) / 360) * this.rotation[1], [0, 1, 0])
+                ),
+                this.material);
 
         /*
         // body

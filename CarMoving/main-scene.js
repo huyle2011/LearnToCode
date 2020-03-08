@@ -5,6 +5,7 @@ import Camera from "./Objects/Camera.js";
 import SkyBox from "./Objects/SkyBox.js";
 import Terrain from "./Objects/Terrain.js";
 import Water from "./Objects/Water.js";
+import Bullet from "./Objects/Bullet.js";
 import MovementControls from "./Controls/MovementControls.js";
 //import EnemyMovementControls from "./Controls/EnemyMovement";
 import CameraControls from "./Controls/CameraControls.js";
@@ -40,6 +41,8 @@ const Main_Scene = class Car_Moving extends Scene {
     this.scratchpad_context = this.scratchpad.getContext("2d");
 
     //entitity initializations
+    this.bullet = new Bullet();
+    this.shot = false;
     this.sky_box = new SkyBox();
     this.terrain = new Terrain(Vec.of(0.5, 0, 0.5), 800);
     this.player = new Player();
@@ -161,6 +164,14 @@ const Main_Scene = class Car_Moving extends Scene {
   make_control_panel() {
     this.key_triggered_button("Day", ["0"], () => (this.is_day = true));
     this.key_triggered_button("Night", ["9"], () => (this.is_day = false));
+    this.key_triggered_button("Shoot", ["i"], () => this.shoot());
+  }
+
+  shoot() {
+    this.shot = true;
+    //this.pause_sound("jump");
+    //this.play_sound("jump");
+    this.bullet = new Bullet(this.player.position, this.player.rotation);
   }
 
   display(context, program_state) {
@@ -254,6 +265,7 @@ const Main_Scene = class Car_Moving extends Scene {
   }
 
   update(program_state) {
+    this.bullet.update(program_state);
     this.sky_box.update(program_state);
     this.terrain.update(program_state);
     this.player.update(program_state);
@@ -295,6 +307,10 @@ const Main_Scene = class Car_Moving extends Scene {
   render(context, program_state) {
     this.terrain.draw(context, program_state);
     this.sky_box.draw(context, program_state);
+    if(this.shot)
+    {
+      this.bullet.draw(context, program_state);
+    }
     this.player.draw(context, program_state);
     this.enemy.draw(context, program_state);
     this.water.draw(context, program_state);
