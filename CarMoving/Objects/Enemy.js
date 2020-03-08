@@ -8,7 +8,7 @@ class Enemy {
     constructor(position = Vec.of(0, 0, 70)) {
         this.shape = new Cube();
         this.material = new Material(new defs.Textured_Phong(3), {
-            texture: new Texture("assets/stars.png"),
+            texture: new Texture("assets/skin.jpg"),
             ambient: 1
         });
         this.position = position;
@@ -247,7 +247,8 @@ class Enemy {
             ? (Math.PI / 3) * Math.sin(program_state.animation_time / 150)
             : 0;
         let transforms = [];
-
+        /* 
+        //old 
         // body
         transforms.push(Mat4.identity().times(Mat4.scale([1, 1.5, 1])));
 
@@ -297,7 +298,94 @@ class Enemy {
                 .times(Mat4.translation([0, -1.5, 0]))
                 .times(Mat4.scale([0.5, 1.5, 1]))
         );
+*/
 
+// body
+transforms.push(Mat4.identity().times(Mat4.scale([2, 1.5, 3])));
+
+// head
+transforms.push(
+    Mat4.identity()
+        .times(Mat4.translation([0, 2.5, 3]))
+        .times(Mat4.scale([1.5,1,1.5]))
+        .times(Mat4.rotation(this.limb_angle / 6, [0, 1, 0]))
+);
+
+//left horn
+transforms.push(
+    Mat4.identity()
+        .times(Mat4.translation([1, 4.5, 3.5]))
+        .times(Mat4.scale([.5,1,.5]))
+        .times(Mat4.rotation(this.limb_angle / 6, [0, 1, 0]))
+);
+//right horn
+transforms.push(
+    Mat4.identity()
+        .times(Mat4.translation([-1, 4.5, 3.5]))
+        .times(Mat4.scale([.5,1,.5]))
+        .times(Mat4.rotation(this.limb_angle / 6, [0, 1, 0]))
+);
+
+// left arm
+/*
+transforms.push(
+    Mat4.identity()
+        .times(Mat4.translation([1.5, 0, 0]))
+        .times(Mat4.translation([0, 1.5, 0]))
+        .times(Mat4.rotation(this.limb_angle / 2, [1, 0, 0]))
+        .times(Mat4.translation([0, -1.5, 0]))
+        .times(Mat4.scale([0.5, 1.5, 1]))
+);
+
+// right arm
+transforms.push(
+    Mat4.identity()
+        .times(Mat4.translation([-1.5, 0, 0]))
+        .times(Mat4.translation([0, 1.5, 0]))
+        .times(Mat4.rotation(-this.limb_angle / 2, [1, 0, 0]))
+        .times(Mat4.translation([0, -1.5, 0]))
+        .times(Mat4.scale([0.5, 1.5, 1]))
+);
+*/
+// left leg front
+transforms.push(
+    Mat4.identity()
+        .times(Mat4.translation([1, -3, 2]))
+        .times(Mat4.translation([0, 1.5, 0]))
+        .times(Mat4.rotation(-this.limb_angle, [1, 0, 0]))
+        .times(Mat4.translation([0, -1.5, 0]))
+        .times(Mat4.scale([0.5, 1.5, 1]))
+);
+
+// right leg front
+transforms.push(
+    Mat4.identity()
+        .times(Mat4.translation([-1, -3, 2]))
+        .times(Mat4.translation([0, 1.5, 0]))
+        .times(Mat4.rotation(this.limb_angle, [1, 0, 0]))
+        .times(Mat4.translation([0, -1.5, 0]))
+        .times(Mat4.scale([0.5, 1.5, 1]))
+);
+
+// left leg back
+transforms.push(
+    Mat4.identity()
+        .times(Mat4.translation([1, -3, -2]))
+        .times(Mat4.translation([0, 1.5, 0]))
+        .times(Mat4.rotation(this.limb_angle, [1, 0, 0]))
+        .times(Mat4.translation([0, -1.5, 0]))
+        .times(Mat4.scale([0.5, 1.5, 1]))
+);
+
+// right leg back
+transforms.push(
+    Mat4.identity()
+        .times(Mat4.translation([-1, -3, -2]))
+        .times(Mat4.translation([0, 1.5, 0]))
+        .times(Mat4.rotation(-this.limb_angle, [1, 0, 0]))
+        .times(Mat4.translation([0, -1.5, 0]))
+        .times(Mat4.scale([0.5, 1.5, 1]))
+);
         transforms.forEach((transform, index) => {
             this.shape.draw(
                 context,

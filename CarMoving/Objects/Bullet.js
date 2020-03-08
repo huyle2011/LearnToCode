@@ -187,12 +187,14 @@ class Bullet {
         this.current_speed = this.RUN_SPEED;
         this.shape.draw(context, program_state,
             Mat4.identity()
+            
                 .times(
                     Mat4.translation([
                         this.position[0],
                         this.position[1],
                         this.position[2]
                     ]))
+                    .times(Mat4.scale([.5,.5,.5]))
                 .times(
                     Mat4.rotation(((2 * Math.PI) / 360) * this.rotation[1], [0, 1, 0])
                 ),
