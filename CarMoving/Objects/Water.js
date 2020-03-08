@@ -18,8 +18,9 @@ class Water {
 
   update(program_state) {
     if (!this.material) return;
-    // this.material.reflection_texture = program_state.water_reflection_texture;
-    // this.material.refraction_texture = program_state.water_refraction_texture;
+    // uncomment 2 lines below for displaying water
+    this.material.reflection_texture = program_state.water_reflection_texture;
+    this.material.refraction_texture = program_state.water_refraction_texture;
     this.material.move_factor += this.WAVE_SPEED * program_state.dt;
     this.material.move_factor %= 1;
   }
