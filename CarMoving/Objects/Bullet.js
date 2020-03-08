@@ -15,7 +15,7 @@ class Bullet {
         this.rotation = rotation;
         this.RUN_SPEED = 60;
         this.TURN_SPEED = 160;
-        this.GRAVITY = 0;
+        this.GRAVITY = -50;
         this.JUMP_POWER = 30;
         this.current_speed = 0;
         this.current_turn_speed = 0;

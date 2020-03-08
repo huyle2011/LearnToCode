@@ -163,13 +163,7 @@ class MovementControls extends Scene {
       }
     );
 
-    this.key_triggered_button(
-        "Shoot",
-        ["i"],
-        () => this.player.shoot(),
-        undefined,
-        undefined
-    );
+
   }
   first_person_flyaround(radians_per_frame, meters_per_frame, leeway = 70) {
     // (Internal helper function)

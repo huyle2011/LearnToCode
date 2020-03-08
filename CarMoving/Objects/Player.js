@@ -167,12 +167,14 @@ class Player {
 
   }
 
+  /*
   shoot() {
     //this.shot = true;
     this.pause_sound("jump");
     this.play_sound("jump");
     //this.bullet = new Bullet(this.position);
   }
+  */
 
   jump() {
     if (!this.is_in_air) {

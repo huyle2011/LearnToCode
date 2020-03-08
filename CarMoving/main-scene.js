@@ -159,6 +159,13 @@ const Main_Scene = class Car_Moving extends Scene {
     d = Vec.of(a,b,c);
     this.enemy29 = new Enemy(d);
 
+    this.enem_array = [this.enemy, this.enemy1, this.enemy2, this.enemy3, this.enemy4, this.enemy5, this.enemy6, this.enemy7, this.enemy8, this.enemy9,
+      this.enemy12, this.enemy13, this.enemy14, this.enemy15, this.enemy16, this.enemy17, this.enemy18, this.enemy19,
+      this.enemy22, this.enemy23, this.enemy24, this.enemy25, this.enemy26, this.enemy27, this.enemy28, this.enemy29];
+
+    this.count = this.enem_array.length;
+
+
   }
 
   make_control_panel() {
@@ -167,15 +174,44 @@ const Main_Scene = class Car_Moving extends Scene {
     this.key_triggered_button("Shoot", ["i"], () => this.shoot());
   }
 
+  /*
+  check_collide(enemy)
+  {
+    if(Math.pow(this.bullet.position[0] - enemy.position[0], 2) < )
+    {
+      enemy.position = Vec.of(999,999,999);
+      this.player.jump();
+    }
+  }
+  */
+
+  check_collide_all()
+  {
+    let i = 0;
+    for(i = 0; i < this.enem_array.length; i++)
+    {
+      if((Math.pow(this.bullet.position[0] - this.enem_array[i].position[0], 2) < 25) && (Math.pow(this.bullet.position[2] - this.enem_array[i].position[2], 2) < 25))
+      {
+        this.bullet.position = Vec.of(999,999,999);
+        this.enem_array[i].position = Vec.of(-999,-999,-999);
+        this.count--;
+      }
+    }
+  }
+
   shoot() {
     this.shot = true;
     //this.pause_sound("jump");
     //this.play_sound("jump");
-    this.bullet = new Bullet(this.player.position, this.player.rotation);
+    //delete this.bullet;
+    //this.bullet = new Bullet(this.player.position, this.player.rotation);
+    this.bullet.position = this.player.position;
+    this.bullet.rotation = this.player.rotation;
   }
 
   display(context, program_state) {
 
+    this.check_collide_all();
     if (!context.scratchpad.controls) {
       // Add a movement controls panel to the page:
       this.children.push(
