@@ -172,6 +172,7 @@ const Main_Scene = class Car_Moving extends Scene {
     this.key_triggered_button("Day", ["0"], () => (this.is_day = true));
     this.key_triggered_button("Night", ["9"], () => (this.is_day = false));
     this.key_triggered_button("Shoot", ["i"], () => this.shoot());
+
   }
 
   /*
@@ -193,7 +194,7 @@ const Main_Scene = class Car_Moving extends Scene {
       if((Math.pow(this.bullet.position[0] - this.enem_array[i].position[0], 2) < 25) && (Math.pow(this.bullet.position[2] - this.enem_array[i].position[2], 2) < 25))
       {
         this.bullet.position = Vec.of(999,999,999);
-        this.enem_array[i].position = Vec.of(-999,-999,-999);
+        this.enem_array[i].position = Vec.of(0,-999,); //change
         this.count--;
       }
     }
@@ -208,6 +209,7 @@ const Main_Scene = class Car_Moving extends Scene {
     this.bullet.position = this.player.position;
     this.bullet.rotation = this.player.rotation;
   }
+
 
   display(context, program_state) {
 
@@ -270,7 +272,6 @@ const Main_Scene = class Car_Moving extends Scene {
     program_state.enemy27 = this.enemy27;
     program_state.enemy28 = this.enemy28;
     program_state.enemy29 = this.enemy29;
-
 
 
 
