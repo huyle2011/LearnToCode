@@ -162,6 +162,14 @@ class MovementControls extends Scene {
         this.player.current_zoom_speed = 0;
       }
     );
+
+    this.key_triggered_button(
+        "Shoot",
+        ["i"],
+        () => this.player.shoot(),
+        undefined,
+        undefined
+    );
   }
   first_person_flyaround(radians_per_frame, meters_per_frame, leeway = 70) {
     // (Internal helper function)
@@ -247,7 +255,7 @@ class MovementControls extends Scene {
       this.will_take_over_graphics_state = false;
     }
 
-    if (!this.mouse_enabled_canvases.has(context.canvas)) {
+    if (this.mouse_enabled_canvases.has(context.canvas)) {
       this.add_mouse_controls(context.canvas);
       this.mouse_enabled_canvases.add(context.canvas);
     }

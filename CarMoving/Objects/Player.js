@@ -1,4 +1,5 @@
 import { tiny, defs } from "../project-resources.js";
+import Bullet from "./Bullet.js";
 
 const { Vec, Mat4, Material, Texture } = tiny;
 const { Cube } = defs;
@@ -28,6 +29,8 @@ class Player {
     this.current_zoom_speed = 0;
     this.current_zoom_factor = 7;
     this.HEIGHT_TO_EYES = 2.5;
+    //this.bullet = new Bullet();
+    //this.shot = false;
     this.sounds = {
       walk: new Audio("assets/walk.wav"),
       jump: new Audio("assets/jump.wav"),
@@ -99,7 +102,7 @@ class Player {
 
   update(program_state) {
     const dt = program_state.dt;
-
+    //this.bullet.update(program_state);
     if (
       this.is_near_object(
         program_state.water.position,
@@ -157,6 +160,19 @@ class Player {
     //   }
     // }
   }
+  move_right() {
+    this.current_turn_speed = this.TURN_SPEED;
+    this.current_speed = this.RUN_SPEED;
+    this.current_turn_speed = -this.TURN_SPEED;
+
+  }
+
+  shoot() {
+    //this.shot = true;
+    this.pause_sound("jump");
+    this.play_sound("jump");
+    //this.bullet = new Bullet(this.position);
+  }
 
   jump() {
     if (!this.is_in_air) {
@@ -168,6 +184,8 @@ class Player {
   }
 
   draw(context, program_state) {
+    //program_state.bullet = this.bullet;
+    //this.bullet.draw(context, program_state.bullet);
     this.limb_angle = this.current_speed
       ? (Math.PI / 3) * Math.sin(program_state.animation_time / 150)
       : 0;

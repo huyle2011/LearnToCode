@@ -52,43 +52,110 @@ const Main_Scene = class Car_Moving extends Scene {
                     new Light( Vec.of(200, 0, 200, 1), Color.of(0.5, 0.4, 0.3, 1), 100000 ),
                     new Light( Vec.of(-200, 0, 200, 1), Color.of(0.5, 0.4, 0.3, 1), 100000 ),
                     new Light( Vec.of(200, 0, -200, 1), Color.of(0.5, 0.4, 0.3, 1), 100000 )];
-    let a = Math.floor((Math.random() * 20) - 10);
-    let b = Math.floor((Math.random() * 20) - 10);
-    let c = 70;
+    let a = Math.floor((Math.random() * 200) - 100);
+    let b = 0;
+    let c = Math.floor((Math.random() * 200) - 100);
     let d = Vec.of(a,b,c);
     this.enemy1 = new Enemy(d);
-    a = Math.floor((Math.random() * 20) - 10);
-    b = Math.floor((Math.random() * 20) - 10);
+    a = Math.floor((Math.random() * 200) - 100);
+    c = Math.floor((Math.random() * 200) - 100);
     d = Vec.of(a,b,c);
     this.enemy2 = new Enemy(d);
-    a = Math.floor((Math.random() * 20) - 10);
-    b = Math.floor((Math.random() * 20) - 10);
+    a = Math.floor((Math.random() * 200) - 100);
+    c = Math.floor((Math.random() * 200) - 100);
     d = Vec.of(a,b,c);
     this.enemy3 = new Enemy(d);
-    a = Math.floor((Math.random() * 20) - 10);
-    b = Math.floor((Math.random() * 20) - 10);
+    a = Math.floor((Math.random() * 200) - 100);
+    c = Math.floor((Math.random() * 200) - 100);
     d = Vec.of(a,b,c);
     this.enemy4 = new Enemy(d);
-    a = Math.floor((Math.random() * 20) - 10);
-    b = Math.floor((Math.random() * 20) - 10);
+    a = Math.floor((Math.random() * 200) - 100);
+    c = Math.floor((Math.random() * 200) - 100);
     d = Vec.of(a,b,c);
     this.enemy5 = new Enemy(d);
-    a = Math.floor((Math.random() * 20) - 10);
-    b = Math.floor((Math.random() * 20) - 10);
+    a = Math.floor((Math.random() * 200) - 100);
+    c = Math.floor((Math.random() * 200) - 100);
     d = Vec.of(a,b,c);
     this.enemy6 = new Enemy(d);
-    a = Math.floor((Math.random() * 20) - 10);
-    b = Math.floor((Math.random() * 20) - 10);
+    a = Math.floor((Math.random() * 200) - 100);
+    c = Math.floor((Math.random() * 200) - 100);
     d = Vec.of(a,b,c);
     this.enemy7 = new Enemy(d);
-    a = Math.floor((Math.random() * 20) - 10);
-    b = Math.floor((Math.random() * 20) - 10);
+    a = Math.floor((Math.random() * 200) - 100);
+    c = Math.floor((Math.random() * 200) - 100);
     d = Vec.of(a,b,c);
     this.enemy8 = new Enemy(d);
-    a = Math.floor((Math.random() * 20) - 10);
-    b = Math.floor((Math.random() * 20) - 10);
+    a = Math.floor((Math.random() * 200) - 100);
+    c = Math.floor((Math.random() * 200) - 100);
     d = Vec.of(a,b,c);
     this.enemy9 = new Enemy(d);
+
+    a = Math.floor((Math.random() * 200) - 100);
+    c = Math.floor((Math.random() * 200) - 100);
+    d = Vec.of(a,b,c);
+    this.enemy12 = new Enemy(d);
+    a = Math.floor((Math.random() * 200) - 100);
+    c = Math.floor((Math.random() * 200) - 100);
+    d = Vec.of(a,b,c);
+    this.enemy13 = new Enemy(d);
+    a = Math.floor((Math.random() * 200) - 100);
+    c = Math.floor((Math.random() * 200) - 100);
+    d = Vec.of(a,b,c);
+    this.enemy14 = new Enemy(d);
+    a = Math.floor((Math.random() * 200) - 100);
+    c = Math.floor((Math.random() * 200) - 100);
+    d = Vec.of(a,b,c);
+    this.enemy15 = new Enemy(d);
+    a = Math.floor((Math.random() * 200) - 100);
+    c = Math.floor((Math.random() * 200) - 100);
+    d = Vec.of(a,b,c);
+    this.enemy16 = new Enemy(d);
+    a = Math.floor((Math.random() * 200) - 100);
+    c = Math.floor((Math.random() * 200) - 100);
+    d = Vec.of(a,b,c);
+    this.enemy17 = new Enemy(d);
+    a = Math.floor((Math.random() * 200) - 100);
+    c = Math.floor((Math.random() * 200) - 100);
+    d = Vec.of(a,b,c);
+    this.enemy18 = new Enemy(d);
+    a = Math.floor((Math.random() * 200) - 100);
+    c = Math.floor((Math.random() * 200) - 100);
+    d = Vec.of(a,b,c);
+    this.enemy19 = new Enemy(d);
+
+    a = Math.floor((Math.random() * 200) - 100);
+    c = Math.floor((Math.random() * 200) - 100);
+    d = Vec.of(a,b,c);
+    this.enemy22 = new Enemy(d);
+    a = Math.floor((Math.random() * 200) - 100);
+    c = Math.floor((Math.random() * 200) - 100);
+    d = Vec.of(a,b,c);
+    this.enemy23 = new Enemy(d);
+    a = Math.floor((Math.random() * 200) - 100);
+    c = Math.floor((Math.random() * 200) - 100);
+    d = Vec.of(a,b,c);
+    this.enemy24 = new Enemy(d);
+    a = Math.floor((Math.random() * 200) - 100);
+    c = Math.floor((Math.random() * 200) - 100);
+    d = Vec.of(a,b,c);
+    this.enemy25 = new Enemy(d);
+    a = Math.floor((Math.random() * 200) - 100);
+    c = Math.floor((Math.random() * 200) - 100);
+    d = Vec.of(a,b,c);
+    this.enemy26 = new Enemy(d);
+    a = Math.floor((Math.random() * 200) - 100);
+    c = Math.floor((Math.random() * 200) - 100);
+    d = Vec.of(a,b,c);
+    this.enemy27 = new Enemy(d);
+    a = Math.floor((Math.random() * 200) - 100);
+    c = Math.floor((Math.random() * 200) - 100);
+    d = Vec.of(a,b,c);
+    this.enemy28 = new Enemy(d);
+    a = Math.floor((Math.random() * 200) - 100);
+    c = Math.floor((Math.random() * 200) - 100);
+    d = Vec.of(a,b,c);
+    this.enemy29 = new Enemy(d);
+
   }
 
   make_control_panel() {
@@ -97,6 +164,7 @@ const Main_Scene = class Car_Moving extends Scene {
   }
 
   display(context, program_state) {
+
     if (!context.scratchpad.controls) {
       // Add a movement controls panel to the page:
       this.children.push(
@@ -137,6 +205,26 @@ const Main_Scene = class Car_Moving extends Scene {
     program_state.enemy7 = this.enemy7;
     program_state.enemy8 = this.enemy8;
     program_state.enemy9 = this.enemy9;
+
+    program_state.enemy12 = this.enemy12;
+    program_state.enemy13 = this.enemy13;
+    program_state.enemy14 = this.enemy14;
+    program_state.enemy15 = this.enemy15;
+    program_state.enemy16 = this.enemy16;
+    program_state.enemy17 = this.enemy17;
+    program_state.enemy18 = this.enemy18;
+    program_state.enemy19 = this.enemy19;
+
+    program_state.enemy22 = this.enemy22;
+    program_state.enemy23 = this.enemy23;
+    program_state.enemy24 = this.enemy24;
+    program_state.enemy25 = this.enemy25;
+    program_state.enemy26 = this.enemy26;
+    program_state.enemy27 = this.enemy27;
+    program_state.enemy28 = this.enemy28;
+    program_state.enemy29 = this.enemy29;
+
+
 
 
     /********************
@@ -182,6 +270,26 @@ const Main_Scene = class Car_Moving extends Scene {
     this.enemy7.update(program_state);
     this.enemy8.update(program_state);
     this.enemy9.update(program_state);
+
+    this.enemy12.update(program_state);
+    this.enemy13.update(program_state);
+    this.enemy14.update(program_state);
+    this.enemy15.update(program_state);
+    this.enemy16.update(program_state);
+    this.enemy17.update(program_state);
+    this.enemy18.update(program_state);
+    this.enemy19.update(program_state);
+
+    this.enemy22.update(program_state);
+    this.enemy23.update(program_state);
+    this.enemy24.update(program_state);
+    this.enemy25.update(program_state);
+    this.enemy26.update(program_state);
+    this.enemy27.update(program_state);
+    this.enemy28.update(program_state);
+    this.enemy29.update(program_state);
+
+
   }
 
   render(context, program_state) {
@@ -200,6 +308,24 @@ const Main_Scene = class Car_Moving extends Scene {
     this.enemy7.draw(context, program_state);
     this.enemy8.draw(context, program_state);
     this.enemy9.draw(context, program_state);
+
+    this.enemy12.draw(context, program_state);
+    this.enemy13.draw(context, program_state);
+    this.enemy14.draw(context, program_state);
+    this.enemy15.draw(context, program_state);
+    this.enemy16.draw(context, program_state);
+    this.enemy17.draw(context, program_state);
+    this.enemy18.draw(context, program_state);
+    this.enemy19.draw(context, program_state);
+
+    this.enemy22.draw(context, program_state);
+    this.enemy23.draw(context, program_state);
+    this.enemy24.draw(context, program_state);
+    this.enemy25.draw(context, program_state);
+    this.enemy26.draw(context, program_state);
+    this.enemy27.draw(context, program_state);
+    this.enemy28.draw(context, program_state);
+    this.enemy29.draw(context, program_state);
   }
 };
 
