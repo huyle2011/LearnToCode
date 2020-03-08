@@ -14,12 +14,12 @@ class Terrain {
 
     this.size = size;
     this.height_map = new Image();
-    this.height_map.src = "assets/heightmap.png";
+    this.height_map.src = "assets/map3.jpg";
     this.height_map.onload = () => {
       this.shape = new TerrainShape(size, this.height_map);
     };
     this.material = new Material(new TerrainShader(10), {
-      texture: new Texture("assets/concrete.png"),
+      texture: new Texture("assets/grass.jpg"),
       ambient: 0.8,
       diffusivity: 1.0,
       specularity: 0
