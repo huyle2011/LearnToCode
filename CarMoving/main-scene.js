@@ -9,7 +9,8 @@ import Bullet from "./Objects/Bullet.js";
 import MovementControls from "./Controls/MovementControls.js";
 //import EnemyMovementControls from "./Controls/EnemyMovement";
 import CameraControls from "./Controls/CameraControls.js";
-
+import ImageControls from "./Controls/ImageControls.js";
+import WaterControls from "./Controls/WaterControls.js";
 
 const { Vec, Mat4, Color, Light, Material, Scene,
   Canvas_Widget, Code_Widget, Text_Widget } = tiny;
@@ -46,15 +47,19 @@ const Main_Scene = class Car_Moving extends Scene {
     this.sky_box = new SkyBox();
     this.terrain = new Terrain(Vec.of(0.5, 0, 0.5), 800);
     this.player = new Player();
-    this.enemy = new Enemy();
     this.camera = new Camera(this.player);
-    this.water = new Water(Vec.of(-20, -45, 0));
+    // this is for setting up the location of the lake of water
+    //this.water = new Water(Vec.of(-220, -45, -180));
+    this.water = new Water(Vec.of(170, -45, -170), 140);
 
     this.lights = [ new Light( Vec.of( 0, 0, 0, 1 ), Color.of( 0.5, 0.4, 0.3,1 ), 100000 ),
                     new Light( Vec.of(-200, 0, -200, 1), Color.of(0.5, 0.4, 0.3, 1), 100000 ),
                     new Light( Vec.of(200, 0, 200, 1), Color.of(0.5, 0.4, 0.3, 1), 100000 ),
                     new Light( Vec.of(-200, 0, 200, 1), Color.of(0.5, 0.4, 0.3, 1), 100000 ),
                     new Light( Vec.of(200, 0, -200, 1), Color.of(0.5, 0.4, 0.3, 1), 100000 )];
+
+    this.enemy = new Enemy();
+
     let a = Math.floor((Math.random() * 200) - 100);
     let b = 0;
     let c = Math.floor((Math.random() * 200) - 100);
@@ -229,8 +234,14 @@ const Main_Scene = class Car_Moving extends Scene {
         1000
       );
 
-
-      this.children.push( (this.camera_controls = new CameraControls(this.camera)) );
+      this.children.push( (this.camera_controls = new CameraControls(this.camera)),
+          // this is for the lake of water and controlling image reflection and refraction
+          (this.water_controls = new WaterControls()),
+          (this.water_reflection_image_control = new ImageControls("Reflection",context,
+              this.scratchpad, this.scratchpad_context, 256)),
+          (this.water_refraction_image_control = new ImageControls("Refraction", context,
+              this.scratchpad, this.scratchpad_context, 256))
+    );
     }
 
     const t = program_state.animation_time / 1000;
@@ -284,6 +295,9 @@ const Main_Scene = class Car_Moving extends Scene {
     let model_transform = Mat4.identity();
 
     program_state.lights = this.lights;
+
+    // add water
+    this.prepare_water(context, program_state);
 
     this.camera_controls.first_person_view_camera = Mat4.look_at(
       this.player.eye_position(),
@@ -341,7 +355,7 @@ const Main_Scene = class Car_Moving extends Scene {
 
   }
 
-  render(context, program_state) {
+  render(context, program_state, check = true) {
     this.terrain.draw(context, program_state);
     this.sky_box.draw(context, program_state);
     if(this.shot)
@@ -350,7 +364,9 @@ const Main_Scene = class Car_Moving extends Scene {
     }
     this.player.draw(context, program_state);
     this.enemy.draw(context, program_state);
-    this.water.draw(context, program_state);
+    if (check) {
+      this.water.draw(context, program_state);
+    }
 
     this.enemy1.draw(context, program_state);
     this.enemy2.draw(context, program_state);
@@ -380,6 +396,88 @@ const Main_Scene = class Car_Moving extends Scene {
     this.enemy28.draw(context, program_state);
     this.enemy29.draw(context, program_state);
   }
+
+  prepare_water(context, program_state) {
+    // water reflection / refraction
+    if (this.player.is_near_object(this.water.position, 20000)) {
+      // reflection
+      program_state.clip_plane = Vec.of(0, 1, 0, -this.water.get_height());
+      let distance = this.invert_view(program_state, this.water.get_height());
+
+      this.render(context, program_state, false);
+
+      this.water_reflection_image_control.take_a_screen_shot();
+      program_state.water_reflection_texture = this.water_reflection_image_control.texture;
+
+      context.context.clear(context.context.COLOR_BUFFER_BIT | context.context.DEPTH_BUFFER_BIT);
+      this.invert_view_back(program_state, distance);
+
+      // refraction
+      program_state.clip_plane = Vec.of(0, -1, 0, this.water.get_height());
+      this.render(context, program_state, false);
+      this.water_refraction_image_control.take_a_screen_shot();
+      program_state.water_refraction_texture = this.water_refraction_image_control.texture;
+
+      context.context.clear(context.context.COLOR_BUFFER_BIT | context.context.DEPTH_BUFFER_BIT);
+    }
+  }
+
+  invert_view(program_state, height) {
+      var distance;
+      if (this.camera_controls.state == 0) {
+        // first person view camera
+        distance = 2 * (this.player.position[1] - height);
+        this.player.position[1] -= distance;
+        this.player.invert_look_up_angle();
+        program_state.set_camera(
+          Mat4.look_at(
+            this.player.eye_position(),
+            this.player.look_at_position(),
+            Vec.of(0, 1, 0)
+          )
+        );
+      } else {
+        distance = 2 * (this.camera.position[1] - height);
+        this.camera.position[1] -= distance;
+        this.camera.invert_pitch();
+        this.camera.update_position();
+        program_state.set_camera(
+          Mat4.look_at(
+            this.camera.position,
+            this.player.position,
+            Vec.of(0, 1, 0)
+          )
+        );
+      }
+
+      return distance;
+    }
+
+    invert_view_back(program_state, distance) {
+      if (this.camera_controls.state == 0) {
+        // first person view camera
+        this.player.position[1] += distance;
+        this.player.invert_look_up_angle();
+        program_state.set_camera(
+          Mat4.look_at(
+            this.player.eye_position(),
+            this.player.look_at_position(),
+            Vec.of(0, 1, 0)
+          )
+        );
+      } else {
+        this.camera.position[1] += distance;
+        this.camera.invert_pitch();
+        this.camera.update_position();
+        program_state.set_camera(
+          Mat4.look_at(
+            this.camera.position,
+            this.player.position,
+            Vec.of(0, 1, 0)
+          )
+        );
+      }
+    }
 };
 
 const Additional_Scenes = [];
@@ -392,3 +490,4 @@ export {
   Text_Widget,
   defs
 };
+
