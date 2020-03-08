@@ -142,6 +142,23 @@ class Enemy {
             this.is_in_air = false;
             this.position[1] = terrain_height + this.HEIGHT_TO_GROUND;
         }
+
+        if (this.position[0]  > 100 )
+        {
+            this.position[0] = this.position[0] - 1;
+        }
+        else if (this.position[0] < -100)
+        {
+            this.position[0] = this.position[0] + 1;
+        }
+        if (this.position[2] > 100 )
+        {
+            this.position[2] = this.position[2] - 1;
+        }
+        else if (this.position[2] < -100)
+        {
+            this.position[2] = this.position[2] + 1;
+        }
         //
         // if (!this.is_in_air && this.current_speed) {
         //   if (this.is_in_water) {
