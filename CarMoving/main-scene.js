@@ -1,5 +1,6 @@
 import { tiny, defs } from "./project-resources.js";
 import Player from "./Objects/Player.js";
+import Shrek from "./Objects/Shrek.js";
 import Enemy from "./Objects/Enemy.js";
 import Camera from "./Objects/Camera.js";
 import SkyBox from "./Objects/SkyBox.js";
@@ -43,6 +44,8 @@ const Main_Scene = class Car_Moving extends Scene {
 
     //entitity initializations
     this.bullet = new Bullet();
+    this.shrek = new Shrek();
+    this.shrek_spawned = false;
     this.shot = false;
     this.last_hit = 0;
     this.sky_box = new SkyBox();
@@ -198,6 +201,19 @@ const Main_Scene = class Car_Moving extends Scene {
         this.bullet.position = Vec.of(999,999,999);
         this.enem_array[i].position = Vec.of(0,-999,); //change
         this.count--;
+        if(!this.count)
+        {
+          this.shrek_spawned = true;
+        }
+      }
+
+      if((Math.pow(this.bullet.position[0] - this.shrek.position[0], 2) < 25) && (Math.pow(this.bullet.position[2] - this.shrek.position[2], 2) < 25))
+      {
+        if(this.shrek_spawned)
+        {
+          this.bullet.position = Vec.of(999, 999, 999);
+          this.shrek.life--;
+        }
       }
 
       if((Math.pow(this.player.position[0] - this.enem_array[i].position[0], 2) < 25) && (Math.pow(this.player.position[2] - this.enem_array[i].position[2], 2) < 25))
@@ -206,6 +222,18 @@ const Main_Scene = class Car_Moving extends Scene {
         {
           this.player.life--;
           this.last_hit = t;
+        }
+      }
+
+      if(this.shrek_spawned)
+      {
+        if((Math.pow(this.player.position[0] - this.shrek.position[0], 2) < 25) && (Math.pow(this.player.position[2] - this.shrek.position[2], 2) < 25))
+        {
+          if(debounce > 2)
+          {
+            this.player.life--;
+            this.last_hit = t;
+          }
         }
       }
     }
@@ -261,6 +289,7 @@ const Main_Scene = class Car_Moving extends Scene {
     program_state.current_terrain = this.terrain;
     program_state.camera = this.camera;
     program_state.player = this.player;
+    program_state.shrek = this.shrek;
     program_state.enemy = this.enemy;
     program_state.water = this.water;
 
@@ -331,6 +360,7 @@ const Main_Scene = class Car_Moving extends Scene {
     this.sky_box.update(program_state);
     this.terrain.update(program_state);
     this.player.update(program_state);
+    this.shrek.update(program_state);
     this.enemy.update(program_state);
     this.camera.update(program_state);
     this.water.update(program_state);
@@ -377,6 +407,10 @@ const Main_Scene = class Car_Moving extends Scene {
       this.bullet.draw(context, program_state);
     }
     this.player.draw(context, program_state);
+    if(this.shrek_spawned)
+    {
+      this.shrek.draw(context, program_state);
+    }
     this.enemy.draw(context, program_state);
     if (check) {
       this.water.draw(context, program_state);
