@@ -11,6 +11,7 @@ class Player {
       texture: new Texture("assets/stars.png"),
       ambient: 1
     });
+    this.life = 3;
     this.position = position;
     this.rotation = Vec.of(0, 180, 0);
     this.RUN_SPEED = 30;
@@ -201,6 +202,23 @@ class Player {
       Mat4.identity()
         .times(Mat4.translation([0, 2.5, 0]))
         .times(Mat4.rotation(this.limb_angle / 6, [0, 1, 0]))
+    );
+
+    // life
+    let i = 0;
+    for(i = 0; i < this.life; i++)
+    {
+      transforms.push(
+          Mat4.identity()
+              .times(Mat4.translation([(-4 * i) + 4, 6, 0]))
+              //.times(Mat4.rotation(this.limb_angle / 6, [0, 1, 0]))
+              //.times(Mat4.scale(.7))
+      );
+    }
+    transforms.push(
+        Mat4.identity()
+            .times(Mat4.translation([0, 2.5, 0]))
+            .times(Mat4.rotation(this.limb_angle / 6, [0, 1, 0]))
     );
 
     // left arm

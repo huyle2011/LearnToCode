@@ -44,6 +44,7 @@ const Main_Scene = class Car_Moving extends Scene {
     //entitity initializations
     this.bullet = new Bullet();
     this.shot = false;
+    this.last_hit = 0;
     this.sky_box = new SkyBox();
     this.terrain = new Terrain(Vec.of(0.5, 0, 0.5), 800);
     this.player = new Player();
@@ -97,7 +98,7 @@ const Main_Scene = class Car_Moving extends Scene {
     c = Math.floor((Math.random() * 200) - 100);
     d = Vec.of(a,b,c);
     this.enemy9 = new Enemy(d);
-
+/*
     a = Math.floor((Math.random() * 200) - 100);
     c = Math.floor((Math.random() * 200) - 100);
     d = Vec.of(a,b,c);
@@ -164,9 +165,14 @@ const Main_Scene = class Car_Moving extends Scene {
     d = Vec.of(a,b,c);
     this.enemy29 = new Enemy(d);
 
-    this.enem_array = [this.enemy, this.enemy1, this.enemy2, this.enemy3, this.enemy4, this.enemy5, this.enemy6, this.enemy7, this.enemy8, this.enemy9,
+ */
+
+    this.enem_array = [this.enemy, this.enemy1, this.enemy2, this.enemy3, this.enemy4, this.enemy5, this.enemy6, this.enemy7, this.enemy8, this.enemy9];
+    /*
       this.enemy12, this.enemy13, this.enemy14, this.enemy15, this.enemy16, this.enemy17, this.enemy18, this.enemy19,
       this.enemy22, this.enemy23, this.enemy24, this.enemy25, this.enemy26, this.enemy27, this.enemy28, this.enemy29];
+
+     */
 
     this.count = this.enem_array.length;
 
@@ -180,19 +186,10 @@ const Main_Scene = class Car_Moving extends Scene {
 
   }
 
-  /*
-  check_collide(enemy)
-  {
-    if(Math.pow(this.bullet.position[0] - enemy.position[0], 2) < )
-    {
-      enemy.position = Vec.of(999,999,999);
-      this.player.jump();
-    }
-  }
-  */
 
-  check_collide_all()
+  check_collide_all(t)
   {
+    let debounce = t - this.last_hit;
     let i = 0;
     for(i = 0; i < this.enem_array.length; i++)
     {
@@ -201,6 +198,15 @@ const Main_Scene = class Car_Moving extends Scene {
         this.bullet.position = Vec.of(999,999,999);
         this.enem_array[i].position = Vec.of(0,-999,); //change
         this.count--;
+      }
+
+      if((Math.pow(this.player.position[0] - this.enem_array[i].position[0], 2) < 25) && (Math.pow(this.player.position[2] - this.enem_array[i].position[2], 2) < 25))
+      {
+        if(debounce > 2)
+        {
+          this.player.life--;
+          this.last_hit = t;
+        }
       }
     }
   }
@@ -218,7 +224,10 @@ const Main_Scene = class Car_Moving extends Scene {
 
   display(context, program_state) {
 
-    this.check_collide_all();
+    const t = program_state.animation_time / 1000;
+    const dt = program_state.animation_delta_time / 1000;
+
+    this.check_collide_all(t);
     if (!context.scratchpad.controls) {
       // Add a movement controls panel to the page:
       this.children.push(
@@ -244,8 +253,7 @@ const Main_Scene = class Car_Moving extends Scene {
     );
     }
 
-    const t = program_state.animation_time / 1000;
-    const dt = program_state.animation_delta_time / 1000;
+
 
     program_state.t = t;
     program_state.dt = dt;
@@ -266,6 +274,7 @@ const Main_Scene = class Car_Moving extends Scene {
     program_state.enemy8 = this.enemy8;
     program_state.enemy9 = this.enemy9;
 
+    /*
     program_state.enemy12 = this.enemy12;
     program_state.enemy13 = this.enemy13;
     program_state.enemy14 = this.enemy14;
@@ -283,6 +292,8 @@ const Main_Scene = class Car_Moving extends Scene {
     program_state.enemy27 = this.enemy27;
     program_state.enemy28 = this.enemy28;
     program_state.enemy29 = this.enemy29;
+
+     */
 
 
 
@@ -334,6 +345,7 @@ const Main_Scene = class Car_Moving extends Scene {
     this.enemy8.update(program_state);
     this.enemy9.update(program_state);
 
+    /*
     this.enemy12.update(program_state);
     this.enemy13.update(program_state);
     this.enemy14.update(program_state);
@@ -351,6 +363,8 @@ const Main_Scene = class Car_Moving extends Scene {
     this.enemy27.update(program_state);
     this.enemy28.update(program_state);
     this.enemy29.update(program_state);
+
+     */
 
 
   }
@@ -378,6 +392,7 @@ const Main_Scene = class Car_Moving extends Scene {
     this.enemy8.draw(context, program_state);
     this.enemy9.draw(context, program_state);
 
+    /*
     this.enemy12.draw(context, program_state);
     this.enemy13.draw(context, program_state);
     this.enemy14.draw(context, program_state);
@@ -395,6 +410,8 @@ const Main_Scene = class Car_Moving extends Scene {
     this.enemy27.draw(context, program_state);
     this.enemy28.draw(context, program_state);
     this.enemy29.draw(context, program_state);
+
+     */
   }
 
   prepare_water(context, program_state) {
