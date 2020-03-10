@@ -8,10 +8,12 @@ class Shrek {
     constructor(position = Vec.of(0, 0, 60)) {
         this.shape = new Cube();
         this.material = new Material(new defs.Textured_Phong(3), {
-            texture: new Texture("assets/green_boi.jpg"),
+            texture: new Texture("assets/stars.png"),
             ambient: 1
         });
         this.life = 3;
+        this.countdown = 0;
+        this.movement = 0;
         this.position = position;
         this.rotation = Vec.of(0, 180, 0);
         this.RUN_SPEED = 30;
@@ -160,23 +162,6 @@ class Shrek {
         //     this.pause_sound("walk");
         //   }
         // }
-
-        if (this.position[0]  > 100 )
-        {
-            this.position[0] = this.position[0] - 3;
-        }
-        else if (this.position[0] < -100)
-        {
-            this.position[0] = this.position[0] + 3;
-        }
-        if (this.position[2] > 100 )
-        {
-            this.position[2] = this.position[2] - 3;
-        }
-        else if (this.position[2] < -100)
-        {
-            this.position[2] = this.position[2] + 3;
-        }
     }
     move_right() {
         this.current_turn_speed = this.TURN_SPEED;
@@ -204,13 +189,6 @@ class Shrek {
     }
 
     draw(context, program_state) {
-        //program_state.bullet = this.bullet;
-        //this.bullet.draw(context, program_state.bullet);
-        this.limb_angle = this.current_speed
-            ? (Math.PI / 3) * Math.sin(program_state.animation_time / 150)
-            : 0;
-        let transforms = [];
-
         let t = program_state.animation_time / 1000;
         //let move_time = t % 5;
 
@@ -244,76 +222,79 @@ class Shrek {
                 break;
         }
 
+        //program_state.bullet = this.bullet;
+        //this.bullet.draw(context, program_state.bullet);
+        this.limb_angle = this.current_speed
+            ? (Math.PI / 3) * Math.sin(program_state.animation_time / 150)
+            : 0;
+        let transforms = [];
 
-      // body
-      transforms.push(
-        Mat4.identity()
-        .times(Mat4.translation([0, 40, 0]))
-        .times(Mat4.scale([15, 20, 15]))
-        
-        
-        );
+        // body
+        transforms.push(Mat4.identity().times(Mat4.scale([1, 1.5, 1])));
 
-    // head
-    
-    transforms.push(
-        Mat4.identity()
-            .times(Mat4.translation([0, 70, 0]))
-           // .times(Mat4.rotation(this.limb_angle / 6, [0, 1, 0]))
-            .times(Mat4.scale([10,10,10]))
-    );
-
-    // life
-    
-    let i = 0;
-    for(i = 0; i < this.life; i++)
-    {
+        // head
         transforms.push(
             Mat4.identity()
-                .times(Mat4.translation([-35, 40 + 5 * i, 0]))
-                //.times(Mat4.rotation(this.limb_angle / 6, [0, 1, 0]))
-                .times(Mat4.scale([2, 2, 2]))
+                .times(Mat4.translation([0, 2.5, 0]))
+                .times(Mat4.rotation(this.limb_angle / 6, [0, 1, 0]))
         );
-    }
 
+        // life
+        let i = 0;
+        for(i = 0; i < this.life; i++)
+        {
+            transforms.push(
+                Mat4.identity()
+                    .times(Mat4.translation([-4, 2 * i, 0]))
+                    //.times(Mat4.rotation(this.limb_angle / 6, [0, 1, 0]))
+                    .times(Mat4.scale([.75, .75, .75]))
+            );
+        }
+        transforms.push(
+            Mat4.identity()
+                .times(Mat4.translation([0, 2.5, 0]))
+                .times(Mat4.rotation(this.limb_angle / 6, [0, 1, 0]))
+        );
 
-    // left arm
-    transforms.push(
-        Mat4.identity()
-            .times(Mat4.translation([17, 50, 0]))
-            .times(Mat4.translation([0, 1.5, 0]))
-            .times(Mat4.rotation(this.limb_angle / 2, [1, 0, 0]))
-            .times(Mat4.translation([0, -10, 0]))
-            .times(Mat4.scale([5, 14, 5]))
-    );
+        // left arm
+        transforms.push(
+            Mat4.identity()
+                .times(Mat4.translation([1.5, 0, 0]))
+                .times(Mat4.translation([0, 1.5, 0]))
+                .times(Mat4.rotation(this.limb_angle / 2, [1, 0, 0]))
+                .times(Mat4.translation([0, -1.5, 0]))
+                .times(Mat4.scale([0.5, 1.5, 1]))
+        );
 
-    // right arm
-    transforms.push(
-        Mat4.identity()
-            .times(Mat4.translation([-17, 50, 0]))
-            .times(Mat4.translation([0, 1.5, 0]))
-            .times(Mat4.rotation(-this.limb_angle / 2, [1, 0, 0]))
-            .times(Mat4.translation([0, -10, 0]))
-            .times(Mat4.scale([5, 14, 5]))
-    );
+        // right arm
+        transforms.push(
+            Mat4.identity()
+                .times(Mat4.translation([-1.5, 0, 0]))
+                .times(Mat4.translation([0, 1.5, 0]))
+                .times(Mat4.rotation(-this.limb_angle / 2, [1, 0, 0]))
+                .times(Mat4.translation([0, -1.5, 0]))
+                .times(Mat4.scale([0.5, 1.5, 1]))
+        );
 
-    // left leg
-    transforms.push(
-        Mat4.identity()
-            .times(Mat4.translation([7,18.5,0])
-            .times(Mat4.rotation(-this.limb_angle/2, [1, 0, 0]))
-            .times(Mat4.translation([0, -10, 0]))
-            .times(Mat4.scale([5, 15, 5])))
-    );
+        // left leg
+        transforms.push(
+            Mat4.identity()
+                .times(Mat4.translation([0.5, -3, 0]))
+                .times(Mat4.translation([0, 1.5, 0]))
+                .times(Mat4.rotation(-this.limb_angle, [1, 0, 0]))
+                .times(Mat4.translation([0, -1.5, 0]))
+                .times(Mat4.scale([0.5, 1.5, 1]))
+        );
 
-    // right leg
-    transforms.push(
-        Mat4.identity()
-            .times(Mat4.translation([-7, 18.5, 0]))
-            .times(Mat4.rotation(this.limb_angle/2, [1, 0, 0]))
-            .times(Mat4.translation([0, -10, 0]))
-            .times(Mat4.scale([5, 15, 5]))
-    );
+        // right leg
+        transforms.push(
+            Mat4.identity()
+                .times(Mat4.translation([-0.5, -3, 0]))
+                .times(Mat4.translation([0, 1.5, 0]))
+                .times(Mat4.rotation(this.limb_angle, [1, 0, 0]))
+                .times(Mat4.translation([0, -1.5, 0]))
+                .times(Mat4.scale([0.5, 1.5, 1]))
+        );
 
         transforms.forEach((transform, index) => {
             this.shape.draw(

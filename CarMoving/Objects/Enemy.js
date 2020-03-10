@@ -45,6 +45,50 @@ class Enemy {
         return dx * dx + dz * dz < distance_square;
     }
 
+    /*
+    eye_position() {
+        const distance =
+            this.current_zoom_factor *
+            Math.cos(((2 * Math.PI) / 360) * this.look_up_angle);
+        const height =
+            this.current_zoom_factor *
+            Math.sin(((2 * Math.PI) / 360) * this.look_up_angle);
+        const dx = distance * Math.sin(((2 * Math.PI) / 360) * this.rotation[1]);
+        const dz = distance * Math.cos(((2 * Math.PI) / 360) * this.rotation[1]);
+
+        return this.position.plus(Vec.of(dx, this.HEIGHT_TO_EYES + height, dz));
+    }
+
+    look_at_position() {
+        const distance =
+            this.current_zoom_factor *
+            Math.cos(((2 * Math.PI) / 360) * this.look_up_angle) +
+            1;
+
+        const height =
+            this.current_zoom_factor *
+            Math.sin(((2 * Math.PI) / 360) * this.look_up_angle);
+
+        const dx1 = distance * Math.sin(((2 * Math.PI) / 360) * this.rotation[1]);
+        const dz1 = distance * Math.cos(((2 * Math.PI) / 360) * this.rotation[1]);
+
+        const reference_position = this.position.plus(
+            Vec.of(dx1, this.HEIGHT_TO_EYES + height, dz1)
+        );
+
+        const distance2 = 1 * Math.sin(((2 * Math.PI) / 360) * this.look_up_angle);
+        const distance3 = 1 * Math.cos(((2 * Math.PI) / 360) * this.look_up_angle);
+        const dx2 = distance3 * Math.sin(((2 * Math.PI) / 360) * this.rotation[1]);
+        const dz2 = distance3 * Math.cos(((2 * Math.PI) / 360) * this.rotation[1]);
+
+        return reference_position.plus(Vec.of(dx2, distance2, dz2));
+    }
+
+    invert_look_up_angle() {
+        this.look_up_angle = -this.look_up_angle;
+    }
+
+     */
 
     play_sound(name, volume = 0.5) {
         if (!this.sounds[name].paused) return;
