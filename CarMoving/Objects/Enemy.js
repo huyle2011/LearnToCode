@@ -194,33 +194,7 @@ class Enemy {
         if(t%2) {
             this.movement = Math.floor((Math.random() * 7));
         }
-        /*
 
-
-        this.key_triggered_button(
-            "Turn Left",
-            ["a"],
-            () => (this.player.current_turn_speed = this.player.TURN_SPEED),
-            undefined,
-            () => (this.player.current_turn_speed = 0)
-        );
-
-        this.key_triggered_button(
-            "Turn Right",
-            ["d"],
-            () => (this.player.current_turn_speed = -this.player.TURN_SPEED),
-            undefined,
-            () => (this.player.current_turn_speed = 0)
-        );
-
-        this.key_triggered_button(
-            "Jump",
-            [" "],
-            () => this.player.jump(),
-            undefined,
-            undefined
-        );
-         */
         switch(this.movement) {
             case 0:
                 this.current_speed = this.RUN_SPEED;

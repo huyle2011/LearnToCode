@@ -12,6 +12,8 @@ class Shrek {
             ambient: 1
         });
         this.life = 3;
+        this.countdown = 0;
+        this.movement = 0;
         this.position = position;
         this.rotation = Vec.of(0, 180, 0);
         this.RUN_SPEED = 30;
@@ -187,6 +189,39 @@ class Shrek {
     }
 
     draw(context, program_state) {
+        let t = program_state.animation_time / 1000;
+        //let move_time = t % 5;
+
+        if(t%5) {
+            this.movement = Math.floor((Math.random() * 7));
+        }
+
+        switch(this.movement) {
+            case 0:
+                this.current_speed = this.RUN_SPEED;
+                break;
+            case 1:
+                this.current_speed = -this.RUN_SPEED;
+                break;
+            case 2:
+                this.current_turn_speed = this.TURN_SPEED;
+                this.current_speed = this.RUN_SPEED;
+                break;
+            case 3:
+                this.current_turn_speed = -this.TURN_SPEED;
+                this.current_speed = this.RUN_SPEED;
+                break;
+            case 4:
+                break;
+            case 5:
+                this.current_speed = 2.0 * this.RUN_SPEED;
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
+        }
+
         //program_state.bullet = this.bullet;
         //this.bullet.draw(context, program_state.bullet);
         this.limb_angle = this.current_speed
