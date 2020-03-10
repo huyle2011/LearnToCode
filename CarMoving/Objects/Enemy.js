@@ -45,6 +45,7 @@ class Enemy {
         return dx * dx + dz * dz < distance_square;
     }
 
+    /*
     eye_position() {
         const distance =
             this.current_zoom_factor *
@@ -86,6 +87,8 @@ class Enemy {
     invert_look_up_angle() {
         this.look_up_angle = -this.look_up_angle;
     }
+
+     */
 
     play_sound(name, volume = 0.5) {
         if (!this.sounds[name].paused) return;

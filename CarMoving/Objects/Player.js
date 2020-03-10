@@ -210,9 +210,9 @@ class Player {
     {
       transforms.push(
           Mat4.identity()
-              .times(Mat4.translation([(-4 * i) + 4, 6, 0]))
+              .times(Mat4.translation([-4, 2 * i, 0]))
               //.times(Mat4.rotation(this.limb_angle / 6, [0, 1, 0]))
-              //.times(Mat4.scale(.7))
+              .times(Mat4.scale([.75, .75, .75]))
       );
     }
     transforms.push(
