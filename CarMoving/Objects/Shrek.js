@@ -12,11 +12,11 @@ class Shrek {
             ambient: 1
         });
         this.life = 3;
-        this.countdown = 0;
+        //this.countdown = 0;
         this.movement = 0;
         this.position = position;
         this.rotation = Vec.of(0, 180, 0);
-        this.RUN_SPEED = 30;
+        this.RUN_SPEED = 90;
         this.TURN_SPEED = 160;
         this.GRAVITY = -50;
         this.JUMP_POWER = 30;

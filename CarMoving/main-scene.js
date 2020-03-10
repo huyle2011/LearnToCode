@@ -178,6 +178,7 @@ const Main_Scene = class Car_Moving extends Scene {
      */
 
     this.count = this.enem_array.length;
+    this.count_down = 30;
 
 
   }
@@ -189,6 +190,19 @@ const Main_Scene = class Car_Moving extends Scene {
 
   }
 
+  check_first_time()
+  {
+    if(!this.shrek_spawned)
+    {
+      this.camera.current_zoom_speed = -3 * this.camera.ZOOM_SPEED;
+
+    }
+    else if(!this.count_down)
+      this.camera.current_zoom_speed = 0;
+    else
+      this.count_down--;
+    //this.camera.current_zoom_speed = 0
+  }
 
   check_collide_all(t)
   {
@@ -196,26 +210,16 @@ const Main_Scene = class Car_Moving extends Scene {
     let i = 0;
     for(i = 0; i < this.enem_array.length; i++)
     {
+      // bullet vs donkeys
       if((Math.pow(this.bullet.position[0] - this.enem_array[i].position[0], 2) < 25) && (Math.pow(this.bullet.position[2] - this.enem_array[i].position[2], 2) < 25))
       {
         this.bullet.position = Vec.of(999,999,999);
         this.enem_array[i].position = Vec.of(0,-999,); //change
         this.count--;
-        if(!this.count)
-        {
-          this.shrek_spawned = true;
-        }
       }
 
-      if((Math.pow(this.bullet.position[0] - this.shrek.position[0], 2) < 25) && (Math.pow(this.bullet.position[2] - this.shrek.position[2], 2) < 25))
-      {
-        if(this.shrek_spawned)
-        {
-          this.bullet.position = Vec.of(999, 999, 999);
-          this.shrek.life--;
-        }
-      }
 
+      // player vs donkey
       if((Math.pow(this.player.position[0] - this.enem_array[i].position[0], 2) < 25) && (Math.pow(this.player.position[2] - this.enem_array[i].position[2], 2) < 25))
       {
         if(debounce > 2)
@@ -225,17 +229,34 @@ const Main_Scene = class Car_Moving extends Scene {
         }
       }
 
-      if(this.shrek_spawned)
+    }
+    // player vs shrek
+    if(this.shrek_spawned)
+    {
+      if((Math.pow(this.player.position[0] - this.shrek.position[0], 2) < 25) && (Math.pow(this.player.position[2] - this.shrek.position[2], 2) < 25))
       {
-        if((Math.pow(this.player.position[0] - this.shrek.position[0], 2) < 25) && (Math.pow(this.player.position[2] - this.shrek.position[2], 2) < 25))
+        if(debounce > 2)
         {
-          if(debounce > 2)
-          {
-            this.player.life--;
-            this.last_hit = t;
-          }
+          this.player.life--;
+          this.last_hit = t;
         }
       }
+    }
+
+    // bullet vs shrek
+    if((Math.pow(this.bullet.position[0] - this.shrek.position[0], 2) < 25) && (Math.pow(this.bullet.position[2] - this.shrek.position[2], 2) < 25))
+    {
+      if(this.shrek_spawned)
+      {
+        this.bullet.position = Vec.of(999, 999, 999);
+        this.shrek.life--;
+      }
+    }
+
+    if(!this.count)
+    {
+      this.check_first_time();
+      this.shrek_spawned = true;
     }
   }
 
