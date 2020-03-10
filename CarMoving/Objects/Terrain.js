@@ -14,7 +14,7 @@ class Terrain {
 
     this.size = size;
     this.height_map = new Image();
-    this.height_map.src = "assets/map3.jpg";
+    this.height_map.src = "assets/map4.jpg";
     this.height_map.onload = () => {
       this.shape = new TerrainShape(size, this.height_map);
     };

@@ -4,7 +4,7 @@ const { Vec, Mat4, Material, Texture } = tiny;
 const { Cube, Square } = defs;
 
 class Water {
-  constructor(position, size = 60) {
+  constructor(position, size = 5) {
     this.position = position;
     this.size = size;
     this.WAVE_SPEED = 0.1;
@@ -29,7 +29,7 @@ class Water {
     if (!this.material) return;
     let transform = Mat4.identity()
       .times(
-        Mat4.translation([this.position[0], this.position[1], this.position[2]])
+        Mat4.translation([this.position[0] + 20, this.position[1], this.position[2]])
       )
       .times(Mat4.rotation(Math.PI / 2, [1, 0, 0]))
       .times(Mat4.scale([this.size, this.size, this.size]));
