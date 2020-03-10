@@ -407,7 +407,7 @@ const Main_Scene = class Car_Moving extends Scene {
       this.bullet.draw(context, program_state);
     }
     this.player.draw(context, program_state);
-    if(this.shrek_spawned)
+    if(truethis.shrek_spawned)
     {
       this.shrek.draw(context, program_state);
     }
