@@ -146,22 +146,6 @@ class Shrek {
             this.is_in_air = false;
             this.position[1] = terrain_height + this.HEIGHT_TO_GROUND;
         }
-        //
-        // if (!this.is_in_air && this.current_speed) {
-        //   if (this.is_in_water) {
-        //     this.play_sound("walk_in_water");
-        //     this.pause_sound("walk");
-        //   } else {
-        //     this.play_sound("walk");
-        //     this.pause_sound("walk_in_water");
-        //   }
-        // } else {
-        //   if (this.is_in_water) {
-        //     this.pause_sound("walk_in_water");
-        //   } else {
-        //     this.pause_sound("walk");
-        //   }
-        // }
 
         if (this.position[0]  > 100 )
         {
