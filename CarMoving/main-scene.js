@@ -37,7 +37,7 @@ const Main_Scene = class Car_Moving extends Scene {
 
     // state
     this.is_day = true;
-
+    this.almost = true;
     // reflection / refraction
     this.scratchpad = document.createElement("canvas");
     this.scratchpad_context = this.scratchpad.getContext("2d");
@@ -47,6 +47,7 @@ const Main_Scene = class Car_Moving extends Scene {
     this.shrek = new Shrek();
     this.shrek_spawned = false;
     this.shot = false;
+    this.bam;
     this.last_hit = 0;
     this.sky_box = new SkyBox();
     this.terrain = new Terrain(Vec.of(0.5, 0, 0.5), 800);
@@ -101,86 +102,15 @@ const Main_Scene = class Car_Moving extends Scene {
     c = Math.floor((Math.random() * 200) - 100);
     d = Vec.of(a,b,c);
     this.enemy9 = new Enemy(d);
-/*
-    a = Math.floor((Math.random() * 200) - 100);
-    c = Math.floor((Math.random() * 200) - 100);
-    d = Vec.of(a,b,c);
-    this.enemy12 = new Enemy(d);
-    a = Math.floor((Math.random() * 200) - 100);
-    c = Math.floor((Math.random() * 200) - 100);
-    d = Vec.of(a,b,c);
-    this.enemy13 = new Enemy(d);
-    a = Math.floor((Math.random() * 200) - 100);
-    c = Math.floor((Math.random() * 200) - 100);
-    d = Vec.of(a,b,c);
-    this.enemy14 = new Enemy(d);
-    a = Math.floor((Math.random() * 200) - 100);
-    c = Math.floor((Math.random() * 200) - 100);
-    d = Vec.of(a,b,c);
-    this.enemy15 = new Enemy(d);
-    a = Math.floor((Math.random() * 200) - 100);
-    c = Math.floor((Math.random() * 200) - 100);
-    d = Vec.of(a,b,c);
-    this.enemy16 = new Enemy(d);
-    a = Math.floor((Math.random() * 200) - 100);
-    c = Math.floor((Math.random() * 200) - 100);
-    d = Vec.of(a,b,c);
-    this.enemy17 = new Enemy(d);
-    a = Math.floor((Math.random() * 200) - 100);
-    c = Math.floor((Math.random() * 200) - 100);
-    d = Vec.of(a,b,c);
-    this.enemy18 = new Enemy(d);
-    a = Math.floor((Math.random() * 200) - 100);
-    c = Math.floor((Math.random() * 200) - 100);
-    d = Vec.of(a,b,c);
-    this.enemy19 = new Enemy(d);
-
-    a = Math.floor((Math.random() * 200) - 100);
-    c = Math.floor((Math.random() * 200) - 100);
-    d = Vec.of(a,b,c);
-    this.enemy22 = new Enemy(d);
-    a = Math.floor((Math.random() * 200) - 100);
-    c = Math.floor((Math.random() * 200) - 100);
-    d = Vec.of(a,b,c);
-    this.enemy23 = new Enemy(d);
-    a = Math.floor((Math.random() * 200) - 100);
-    c = Math.floor((Math.random() * 200) - 100);
-    d = Vec.of(a,b,c);
-    this.enemy24 = new Enemy(d);
-    a = Math.floor((Math.random() * 200) - 100);
-    c = Math.floor((Math.random() * 200) - 100);
-    d = Vec.of(a,b,c);
-    this.enemy25 = new Enemy(d);
-    a = Math.floor((Math.random() * 200) - 100);
-    c = Math.floor((Math.random() * 200) - 100);
-    d = Vec.of(a,b,c);
-    this.enemy26 = new Enemy(d);
-    a = Math.floor((Math.random() * 200) - 100);
-    c = Math.floor((Math.random() * 200) - 100);
-    d = Vec.of(a,b,c);
-    this.enemy27 = new Enemy(d);
-    a = Math.floor((Math.random() * 200) - 100);
-    c = Math.floor((Math.random() * 200) - 100);
-    d = Vec.of(a,b,c);
-    this.enemy28 = new Enemy(d);
-    a = Math.floor((Math.random() * 200) - 100);
-    c = Math.floor((Math.random() * 200) - 100);
-    d = Vec.of(a,b,c);
-    this.enemy29 = new Enemy(d);
-
- */
 
     this.enem_array = [this.enemy, this.enemy1, this.enemy2, this.enemy3, this.enemy4, this.enemy5, this.enemy6, this.enemy7, this.enemy8, this.enemy9];
-    /*
-      this.enemy12, this.enemy13, this.enemy14, this.enemy15, this.enemy16, this.enemy17, this.enemy18, this.enemy19,
-      this.enemy22, this.enemy23, this.enemy24, this.enemy25, this.enemy26, this.enemy27, this.enemy28, this.enemy29];
-
-     */
 
     this.count = this.enem_array.length;
     this.count_down = 30;
 
-
+    this.sounds = {
+      bam: new Audio("assets/gunshot.wav")
+    };
   }
 
   make_control_panel() {
@@ -188,6 +118,18 @@ const Main_Scene = class Car_Moving extends Scene {
     this.key_triggered_button("Night", ["9"], () => (this.is_day = false));
     this.key_triggered_button("Shoot", ["i"], () => this.shoot());
 
+  }
+
+  play_sound(name, volume = 0.5) {
+    if (!this.sounds[name].paused) return;
+    this.sounds[name].currentTime = 0;
+    this.sounds[name].volume = volume;
+    this.sounds[name].play();
+  }
+
+  pause_sound(name) {
+    this.sounds[name].pause();
+    this.sounds[name].currentTime = 0;
   }
 
   check_first_time()
@@ -262,10 +204,7 @@ const Main_Scene = class Car_Moving extends Scene {
 
   shoot() {
     this.shot = true;
-    //this.pause_sound("jump");
-    //this.play_sound("jump");
-    //delete this.bullet;
-    //this.bullet = new Bullet(this.player.position, this.player.rotation);
+    this.bam = true;
     this.bullet.position = this.player.position;
     this.bullet.rotation = this.player.rotation;
   }
@@ -378,6 +317,25 @@ const Main_Scene = class Car_Moving extends Scene {
 
   update(program_state) {
     this.bullet.update(program_state);
+    if (this.shot && this.bam) {
+      this.bam = false;
+      this.play_sound("bam");
+      setTimeout(() => { this.pause_sound("bam"); }, 400);
+    }
+
+    if (this.is_day) {
+      if (this.almost) {
+        setTimeout(() => {
+          this.is_day = false;
+          this.almost = !this.almost;
+        }, 20000);
+      }
+    } else {
+      if (this.almost) {
+        setTimeout(() => { this.is_day = true; this.almost = !this.almost; }, 20000);
+      }
+    }
+
     this.sky_box.update(program_state);
     this.terrain.update(program_state);
     this.player.update(program_state);

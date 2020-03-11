@@ -2,18 +2,19 @@
 import { tiny, defs } from "../project-resources.js";
 
 const { Vec, Mat4, Material, Texture } = tiny;
-const { Cube } = defs;
+const { Cube, Subdivision_Sphere } = defs;
 
 class Bullet {
     constructor(position = Vec.of(0, 0, 80), rotation = Vec.of(0,180,0)) {
-        this.shape = new Cube();
+        //this.shape = new Cube();
+        this.shape = new Subdivision_Sphere(1);
         this.material = new Material(new defs.Textured_Phong(3), {
-            texture: new Texture("assets/stars.png"),
+            texture: new Texture("assets/fireball1.png"),
             ambient: 1
         });
         this.position = position;
         this.rotation = rotation;
-        this.RUN_SPEED = 60;
+        this.RUN_SPEED = 200;
         this.TURN_SPEED = 160;
         this.GRAVITY = -50;
         this.JUMP_POWER = 30;

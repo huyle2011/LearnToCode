@@ -2,13 +2,14 @@ import { tiny, defs } from "../project-resources.js";
 import Bullet from "./Bullet.js";
 
 const { Vec, Mat4, Material, Texture } = tiny;
-const { Cube } = defs;
+const { Cube, Subdivision_Sphere } = defs;
 
 class Player {
   constructor(position = Vec.of(0, 0, 60)) {
-    this.shape = new Cube();
+    //this.shape = new Cube();
+    this.shape = new Subdivision_Sphere(3);
     this.material = new Material(new defs.Textured_Phong(3), {
-      texture: new Texture("assets/stars.png"),
+      texture: new Texture("assets/fireball1.png"),
       ambient: 1
     });
     this.life = 3;
@@ -35,7 +36,7 @@ class Player {
     this.sounds = {
       walk: new Audio("assets/walk.wav"),
       jump: new Audio("assets/jump.wav"),
-      // walk_in_water: new Audio("assets/water_footstep.wav")
+      in_water: new Audio("assets/water_footstep.wav")
     };
     this.is_in_water = false;
   }
@@ -144,22 +145,22 @@ class Player {
       this.is_in_air = false;
       this.position[1] = terrain_height + this.HEIGHT_TO_GROUND;
     }
-    //
-    // if (!this.is_in_air && this.current_speed) {
-    //   if (this.is_in_water) {
-    //     this.play_sound("walk_in_water");
-    //     this.pause_sound("walk");
-    //   } else {
-    //     this.play_sound("walk");
-    //     this.pause_sound("walk_in_water");
-    //   }
-    // } else {
-    //   if (this.is_in_water) {
-    //     this.pause_sound("walk_in_water");
-    //   } else {
-    //     this.pause_sound("walk");
-    //   }
-    // }
+
+    if (!this.is_in_air && this.current_speed) {
+      if (this.is_in_water) {
+        this.play_sound("in_water");
+        this.pause_sound("walk");
+      } else {
+        this.play_sound("walk");
+        this.pause_sound("in_water");
+      }
+    } else {
+      if (this.is_in_water) {
+        this.pause_sound("in_water");
+      } else {
+        this.pause_sound("walk");
+      }
+    }
   }
   move_right() {
     this.current_turn_speed = this.TURN_SPEED;
