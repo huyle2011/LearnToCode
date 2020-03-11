@@ -206,7 +206,7 @@ const Main_Scene = class Car_Moving extends Scene {
     }
 
     // bullet vs shrek
-    if((Math.pow(this.bullet.position[0] - this.shrek.position[0], 2) < 25) && (Math.pow(this.bullet.position[2] - this.shrek.position[2], 2) < 25))
+    if((Math.pow(this.bullet.position[0] - this.shrek.position[0], 2) < 100) && (Math.pow(this.bullet.position[2] - this.shrek.position[2], 2) < 100))
     {
       if(this.shrek_spawned)
       {
