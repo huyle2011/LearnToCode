@@ -37,7 +37,7 @@ const Main_Scene = class Car_Moving extends Scene {
     };
 
     // state
-    this.is_day = true;
+    this.is_day = false;
     this.almost = true;
     // reflection / refraction
     this.scratchpad = document.createElement("canvas");
@@ -130,7 +130,9 @@ const Main_Scene = class Car_Moving extends Scene {
 
     this.sounds = {
       bam: new Audio("assets/gunshot.wav"),
-      shrek_voice: new Audio("assets/shrek_voice.wav")
+      shrek_voice: new Audio("assets/shrek_voice.wav"),
+      ending: new Audio("assets/ending.wav")
+
 
     };
   }
@@ -215,6 +217,15 @@ const Main_Scene = class Car_Moving extends Scene {
       {
         this.bullet.position = Vec.of(999, 999, 999);
         this.shrek.life--;
+        if(!this.shrek.life)
+        {
+          this.shrek.position = Vec.of(-999,-999,-999);
+          this.shrek_spawned = false;
+          this.count++;
+          this.is_day = true;
+          this.play_sound("ending");
+          setTimeout(() => { this.pause_sound("ending"); }, 7000);
+        }
       }
     }
 
@@ -352,6 +363,7 @@ const Main_Scene = class Car_Moving extends Scene {
       setTimeout(() => { this.pause_sound("bam"); }, 400);
     }
 
+    /*
     if (this.is_day) {
       if (this.almost) {
         setTimeout(() => {
@@ -364,6 +376,8 @@ const Main_Scene = class Car_Moving extends Scene {
         setTimeout(() => { this.is_day = true; this.almost = !this.almost; }, 20000);
       }
     }
+
+     */
 
     this.sky_box.update(program_state);
     this.terrain.update(program_state);
