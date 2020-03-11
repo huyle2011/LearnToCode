@@ -129,7 +129,9 @@ const Main_Scene = class Car_Moving extends Scene {
     this.count_down = 30;
 
     this.sounds = {
-      bam: new Audio("assets/gunshot.wav")
+      bam: new Audio("assets/gunshot.wav"),
+      shrek_voice: new Audio("assets/shrek_voice.wav")
+
     };
   }
 
@@ -157,7 +159,8 @@ const Main_Scene = class Car_Moving extends Scene {
     if(!this.shrek_spawned)
     {
       this.camera.current_zoom_speed = -3 * this.camera.ZOOM_SPEED;
-
+      this.play_sound("shrek_voice");
+      setTimeout(() => { this.pause_sound("shrek_voice"); }, 3000);
     }
     else if(!this.count_down)
       this.camera.current_zoom_speed = 0;
