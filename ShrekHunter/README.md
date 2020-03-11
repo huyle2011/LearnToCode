@@ -74,7 +74,7 @@ But there is a problem of this approach. The ratio of reflection and refraction 
 of the camera. In theory, the water will refract more when the camera is on top of the water, also the water will
 reflect more when the camera is on the side.
 
-To solve this problem, we are taking the dot product of the normal vector of the water (at some particular point) and
+To solve this problem, we are taking the dot product of the normal vector of the water (at a particular point) and
 the vector (from this particular point) to the camera. By doing that, we can change the ratio of the reflection and 
 refraction based on the camera position.
 
