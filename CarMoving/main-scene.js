@@ -2,6 +2,7 @@ import { tiny, defs } from "./project-resources.js";
 import Player from "./Objects/Player.js";
 import Shrek from "./Objects/Shrek.js";
 import Enemy from "./Objects/Enemy.js";
+import Alien from "./Objects/Alien.js";
 import Camera from "./Objects/Camera.js";
 import SkyBox from "./Objects/SkyBox.js";
 import Terrain from "./Objects/Terrain.js";
@@ -103,7 +104,26 @@ const Main_Scene = class Car_Moving extends Scene {
     d = Vec.of(a,b,c);
     this.enemy9 = new Enemy(d);
 
-    this.enem_array = [this.enemy, this.enemy1, this.enemy2, this.enemy3, this.enemy4, this.enemy5, this.enemy6, this.enemy7, this.enemy8, this.enemy9];
+    this.alien = new Alien();
+    this.alien1 = new Alien(d);
+    a = Math.floor((Math.random() * 200) - 100);
+    c = Math.floor((Math.random() * 200) - 100);
+    d = Vec.of(a,b,c);
+    this.alien2 = new Alien(d);
+    a = Math.floor((Math.random() * 200) - 100);
+    c = Math.floor((Math.random() * 200) - 100);
+    d = Vec.of(a,b,c);
+    this.alien3 = new Alien(d);
+    a = Math.floor((Math.random() * 200) - 100);
+    c = Math.floor((Math.random() * 200) - 100);
+    d = Vec.of(a,b,c);
+    this.alien4 = new Alien(d);
+    a = Math.floor((Math.random() * 200) - 100);
+    c = Math.floor((Math.random() * 200) - 100);
+    d = Vec.of(a,b,c);
+
+    this.enem_array = [ this.enemy, this.enemy1, this.enemy2, this.enemy3, this.enemy4, this.enemy5, this.enemy6, this.enemy7, this.enemy8, this.enemy9,
+                        this.alien, this.alien1, this.alien2, this.alien3, this.alien4 ];
 
     this.count = this.enem_array.length;
     this.count_down = 30;
@@ -263,6 +283,12 @@ const Main_Scene = class Car_Moving extends Scene {
     program_state.enemy8 = this.enemy8;
     program_state.enemy9 = this.enemy9;
 
+    program_state.alien = this.alien;
+    program_state.alien1 = this.alien1;
+    program_state.alien2 = this.alien2;
+    program_state.alien3 = this.alien3;
+    program_state.alien4 = this.alien4;
+
     /*
     program_state.enemy12 = this.enemy12;
     program_state.enemy13 = this.enemy13;
@@ -354,6 +380,11 @@ const Main_Scene = class Car_Moving extends Scene {
     this.enemy8.update(program_state);
     this.enemy9.update(program_state);
 
+    this.alien.update(program_state);
+    this.alien1.update(program_state);
+    this.alien2.update(program_state);
+    this.alien3.update(program_state);
+    this.alien4.update(program_state);
     /*
     this.enemy12.update(program_state);
     this.enemy13.update(program_state);
@@ -405,6 +436,11 @@ const Main_Scene = class Car_Moving extends Scene {
     this.enemy8.draw(context, program_state);
     this.enemy9.draw(context, program_state);
 
+    this.alien.draw(context, program_state);
+    this.alien1.draw(context, program_state);
+    this.alien2.draw(context, program_state);
+    this.alien3.draw(context, program_state);
+    this.alien4.draw(context, program_state);
     /*
     this.enemy12.draw(context, program_state);
     this.enemy13.draw(context, program_state);
