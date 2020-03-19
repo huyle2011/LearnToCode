@@ -9,15 +9,15 @@ The most difficult part of this project is creating the water (complicated and e
 - Huy Le 705148583
 
 # Contribution
-Cody Pham:
-- Skybox
-- Objects (Player, Donkeys, Aliens, and Shrek)
-Junya Honda:
-- Terrain 
-- Collision
-Huy Le:
-- Water
-- 1st / 3rd person view camera
+- Cody Pham:
+  + Skybox
+  + Objects (Player, Donkeys, Aliens, and Shrek)
+- Junya Honda:
+  + Terrain 
+  + Collision
+- Huy Le:
+  + Water (Reflection and Refraction)
+  + 1st / 3rd person view camera
 
 # Introduction
 
