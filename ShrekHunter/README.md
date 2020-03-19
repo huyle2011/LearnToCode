@@ -30,13 +30,13 @@ As a player, you can walk around the field, and see something like this on the s
 
 Here’s the list of advanced graphics features we implemented
 
-[x] [Skybox]
-[x] [Object View] or [1st Person View]
-[x] [Audience View] or [3rd Person View]
-[x] [Water]
-[x] [Objects]
-[x] [Terrain]
-[x] [Collision]
+- [x] [Skybox]
+- [x] [Object View] or [1st Person View]
+- [x] [Audience View] or [3rd Person View]
+- [x] [Water]
+- [x] [Objects]
+- [x] [Terrain]
+- [x] [Collision]
 
 # Skybox
 The idea to make the skybox is that we create the big box and apply sky texture on each side of the box.
