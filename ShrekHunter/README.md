@@ -9,12 +9,15 @@ The most difficult part of this project is creating the water (complicated and e
 - Huy Le 705148583
 
 # Contribution
+Cody Pham:
 - Skybox
-- 1st / 3rd person view camera
-- Water
-- Objects (Player, Donkeys, and Aliens)
+- Objects (Player, Donkeys, Aliens, and Shrek)
+Junya Honda:
 - Terrain 
 - Collision
+Huy Le:
+- Water
+- 1st / 3rd person view camera
 
 # Introduction
 
@@ -27,15 +30,15 @@ As a player, you can walk around the field, and see something like this on the s
 
 Here’s the list of advanced graphics features we implemented
 
-- [x] [Skybox](https://www.youtube.com/watch?v=_Ix5oN8eC1E&list=PLRIWtICgwaX0u7Rf9zkZhLoLuZVfUksDP&index=27)
-- [x] [Object View] or [1st Person View]
-- [x] [Audience View] or [3rd Person View](https://www.youtube.com/watch?v=PoxDDZmctnU&list=PLRIWtICgwaX0u7Rf9zkZhLoLuZVfUksDP&index=19&frags=pl%2Cwn>)
-- [x] [Water](https://www.youtube.com/watch?v=HusvGeEDU_U&list=PLRIWtICgwaX23jiqVByUs0bqhnalNTNZh)
-- [x] [Objects](http://learningthreejs.com/blog/2012/07/05/minecraft-character-in-webgl/)
-- [x] Terrain
-- [x] Collision
+[x] [Skybox]
+[x] [Object View] or [1st Person View]
+[x] [Audience View] or [3rd Person View]
+[x] [Water]
+[x] [Objects]
+[x] [Terrain]
+[x] [Collision]
 
-## Skybox
+# Skybox
 The idea to make the skybox is that we create the big box and apply sky texture on each side of the box.
 In order to make a better looking, we apply different texture on each side of the box.
 
@@ -85,5 +88,3 @@ the green for distortion in y-direction. The magnitude of those distortions will
 (how red/green the pixel is).
 
 Finally, we apply normal map to the water to see the diffuse and specular lightning.
-
-
