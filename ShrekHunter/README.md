@@ -1,9 +1,9 @@
 # Shrek Hunter
 
 # Diffuculties
-Honestly, everything is difficult since we have to take physical aspect into account.
+Honestly, everything is difficult since we have to take physical aspects into account.
 From building the terrain, the skybox, the object, and the water. Physics plays a major role in
-implementing those.
+implementing those things.
 The most difficult part of this project is creating the water since we have to take into account many
 aspects of reality like reflection, refraction, and the distortion of the water surface.
 Those things contribute to make the water implementation in our game becomes complicated and expensive computation.
