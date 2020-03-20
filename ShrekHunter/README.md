@@ -1,7 +1,12 @@
 # Shrek Hunter
 
 # Diffuculties
-The most difficult part of this project is creating the water (complicated and expensive computation).
+Honestly, everything is difficult since we have to take physical aspect into account.
+From building the terrain, the skybox, the object, and the water. Physics plays a major role in
+implementing those.
+The most difficult part of this project is creating the water since we have to take into account many
+aspects of reality like reflection, refraction, and the distortion of the water surface.
+Those things contribute to make the water implementation in our game becomes complicated and expensive computation.
 
 # Team's members
 - Cody Pham 205359993
@@ -85,6 +90,11 @@ In order to make the water even more real, we have to think about the distortion
 DuDv map stores the directional information. It can tell how much and which way we want to distort our texture.
 The color of DuDv map is mostly red, green, yellow. We are going to apply the red for distortion in x-direction,
 the green for distortion in y-direction. The magnitude of those distortions will be defined by the value of those pixels
-(how red/green the pixel is).
+on DuDv map (how red/green the pixel is).
 
 Finally, we apply normal map to the water to see the diffuse and specular lightning.
+
+# Collision
+Starting off with having a box around every enemy (in the x and z coordinates, with y axis being the axis going upwards). 
+Everytime the collision detection function was called inside the draw function, the bullet would compare its x and z coordinates
+with those of all the enemies’ hitboxes, and if the bullet x and z coordinates were inside of the hitboxes, the enemy got sent into oblivion.
